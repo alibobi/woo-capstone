@@ -8,6 +8,11 @@ app = Flask(__name__)
 def hello():
     return 'Hello, World!'
 
+# Define a route and a function to handle requests to that route
+@app.route('/test')
+def test():
+    return 'test, test!'
+
 def build_db() -> None:
     db.drop_all()
     db.create_all()
