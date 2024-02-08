@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 # Create a Flask application
 app = Flask(__name__)
@@ -11,7 +11,7 @@ def hello():
 # Define a route and a function to handle requests to that route
 @app.route('/test')
 def test():
-    return 'test, test!'
+    return render_template('home.html')
 
 def build_db() -> None:
     db.drop_all()
