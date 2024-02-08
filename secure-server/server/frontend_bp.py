@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, flash
 
 frontend = Blueprint("frontend", __name__)
 
@@ -20,7 +20,7 @@ def create_account_page():
 
 
 @frontend.route("/create_account", methods=["POST"])
-@frontend.route("/register.php", methods=["POST"])
+@frontend.route("/create_account.html", methods=["POST"])
 def create_account():
 	username = request.form['username']
 	email = request.form['email']
@@ -30,13 +30,19 @@ def create_account():
 	print(email)
 	print(password)
 
-	print("/create_account_success")
-	return redirect("/create_account_success")
-
+	if(username == "fail"):
+		error = "Bad account"
+	else:
+		flash('Successfully logged on')
+		return redirect("/create_account_success")
+	return render_template('create_account.html', error=error)
 
 @frontend.route("/create_account_success")
 def create_account_success():
-        return "Account created successfully"
+	return render_template('account_success.html')
 
 
+@frontend.route("/forgot_password")
+def forgot_password():
+	return render_template('forgot_password.html')
 
