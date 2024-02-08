@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home | Woo Capstone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .login_success {
+            text-align: center;
+            margin-top: 10px; /* Increased margin top to create more space */
+        }
+        .login_success button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .login_success button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login_success">
+            <p>
+                successful login... (congrats)
+            </p>
+            
+            <button onclick="window.location.href = 'home.html';" id="myButton" class="float-left submit-button">Return Home</button>
+        </div>
+    </div>
+
+</body>
+</html>
