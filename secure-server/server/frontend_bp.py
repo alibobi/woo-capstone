@@ -3,10 +3,10 @@ from flask import Blueprint, render_template, request, redirect, url_for
 frontend = Blueprint("frontend", __name__)
 
 @frontend.route("/")
-@frontend.route("/home")
-@frontend.route("/home.html")
+@frontend.route("/index")
+@frontend.route("/index.html")
 def home():
-	return render_template('home.html')
+	return render_template('index.html')
 
 @frontend.route("/login")
 @frontend.route("/login.html")
