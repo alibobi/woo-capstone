@@ -12,7 +12,8 @@ def build_db() -> None:
     db.drop_all()
     db.create_all()
 
-# Run the Flask application
-if __name__ == '__main__':
-    app.run(debug=True)
+def run():
+	app.run(debug=True, port=9999)
+
+
 
