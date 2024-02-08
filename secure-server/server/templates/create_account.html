@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% extends "layout.html" %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,10 +70,13 @@
     </style>
 </head>
 <body>
-
+{% block body %}
 <div class="container">
     <div class="registration-container">
         <h2>Create Account</h2>
+        {% if error %}
+            <p class=error><strong>Error:</strong> {{ error }}
+        {% endif %}
         <form action="create_account" method="POST">
             <input type="text" name="username" placeholder="Username" required>
             <input type="email" name="email" placeholder="Email" required>
@@ -85,6 +89,7 @@
         <button onclick="window.location.href = 'home.html';">Home</button>
     </div>
 </div>
+{% endblock %}
 
 </body>
 </html>
