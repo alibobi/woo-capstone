@@ -8,10 +8,21 @@ frontend = Blueprint("frontend", __name__)
 def home():
 	return render_template('index.html')
 
-@frontend.route("/login")
-@frontend.route("/login.html")
-def login():
+@frontend.route("/login", methods=["GET"])
+@frontend.route("/login.html", methods=["GET"])
+def login_page():
 	return render_template('login.html')
+
+@frontend.route("/login", methods=["POST"])
+@frontend.route("/login.html", methods=["POST"])
+def login_attempt():
+	username = request.form['username']
+	
+	if username == "fail":
+		flash('Username not allowed to login')
+		return render_template('login.html')
+	else:
+        	return redirect('/index')
 
 @frontend.route("/create_account", methods=["GET"])
 @frontend.route("/create_account.html", methods=["GET"])
