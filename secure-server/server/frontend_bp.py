@@ -22,7 +22,7 @@ def login_attempt():
 		flash('Username not allowed to login')
 		return render_template('login.html')
 	else:
-        	return redirect('/index')
+        	return render_template('login_success.html')
 
 @frontend.route("/create_account", methods=["GET"])
 @frontend.route("/create_account.html", methods=["GET"])
