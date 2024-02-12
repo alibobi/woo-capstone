@@ -3,10 +3,10 @@ from flask import Blueprint, render_template, request, redirect, flash
 frontend = Blueprint("frontend", __name__)
 
 @frontend.route("/")
-@frontend.route("/index")
-@frontend.route("/index.html")
+@frontend.route("/home")
+@frontend.route("/home.html")
 def home():
-	return render_template('index.html')
+	return render_template('home.html')
 
 @frontend.route("/login")
 @frontend.route("/login.html")
@@ -31,11 +31,10 @@ def create_account():
 	print(password)
 
 	if(username == "fail"):
-		error = "Bad account"
+		flash('User already exists')
+		return render_template('test_flash.html', error=error)
 	else:
-		flash('Successfully logged on')
 		return redirect("/create_account_success")
-	return render_template('create_account.html', error=error)
 
 @frontend.route("/create_account_success")
 def create_account_success():
