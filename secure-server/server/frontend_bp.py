@@ -32,7 +32,7 @@ def create_account():
 
 	if(username == "fail"):
 		flash('User already exists')
-		return render_template('test_flash.html', error=error)
+		return render_template('create_account.html')
 	else:
 		return redirect("/create_account_success")
 
