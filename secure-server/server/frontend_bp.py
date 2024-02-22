@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, flash
 from server.db import db
-from server.crypto import generate_password_hash
+from server.crypto import generate_password_hash, verify_password
 from server.models import User, make_user
 
 frontend = Blueprint("frontend", __name__)
@@ -25,16 +25,13 @@ def login_attempt():
 
 	user = User.query.filter_by(username=username).first()
 
-	if user and (passwd_hash == user.password):
+	if user and verify_password(password, user.password):
 		print("Logged in with user:", user) 
+		return render_template('login_success.html')
 	else:
-		print("Failed to log in")
-
-	if username == "fail":
-		flash('Username not allowed to login')
+		flash('Login failed')
 		return render_template('login.html')
-	else:
-        	return render_template('login_success.html')
+
 
 @frontend.route("/create_account", methods=["GET"])
 @frontend.route("/create_account.html", methods=["GET"])
