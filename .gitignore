@@ -1,1 +1,2 @@
-./secure-server/server/__pycache__
+./secure-server/server/__pycache__/*
+./secure-server/instance/test.db
