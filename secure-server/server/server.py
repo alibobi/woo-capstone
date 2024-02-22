@@ -22,7 +22,7 @@ def run():
 	limiter = Limiter(
 		get_remote_address,
 		app=app,
-		default_limits=["5 per minute", "1 per second"]
+		default_limits=["50 per minute", "1 per second"]
 	)
  
 	app.register_blueprint(frontend)
