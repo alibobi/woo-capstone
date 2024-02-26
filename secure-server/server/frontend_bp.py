@@ -21,7 +21,24 @@ def login_page():
 @frontend.route("/login.html", methods=["POST"])
 def login_attempt():
 	username = request.form['username']
+	username_pattern = re.compile(r'^[a-z0-9_\-\.]{3,16}$')
+	if username_pattern.match(username):
+		print("Username entered")
+	else:
+		# Username must only contain lowercase letters, numbers, -, ., or _, and must be between 3 and 16 chars
+		flash("Username is invalid")
+		return render_template('login')
+ 
 	password = request.form['password']
+	password_pattern = re.compile(r'^[a-zA-Z0-9_\-\!\@\#\$\%\^\&\*]{8,}$')
+	if password_pattern.match(password):
+		print("Password entered")
+	else:
+		# Password must be 8+ characters
+		flash("Password is invalid")
+		return render_template('login.html')
+ 
+ 
 	passwd_hash = generate_password_hash(password)
 
 	user = User.query.filter_by(username=username).first()
@@ -45,33 +62,31 @@ def create_account_page():
 def create_account():
     # we're very intentionally whitelisting certain chars as opposed to blacklisting, we're more likely to forget things
 	username = request.form['username']
-	# username_regex = r'/^[a-z0-9\_\-\.]{3, 16}/'
-	# # search or full match?
-	# if re.search(username_regex, username):
-	# 	pass
-	# else:
-	# 	# Username must only contain lowercase letters, numbers, -, ., or _, and must be between 3 and 16 chars
-	# 	flash("Username is invalid")
-	# 	return render_template('create_account.html')
+	username_pattern = re.compile(r'^[a-z0-9_\-\.]{3,16}$')
+	if username_pattern.match(username):
+		print("Username format correct: " + username)
+	else:
+		# Username must only contain lowercase letters, numbers, -, ., or _, and must be between 3 and 16 chars
+		flash("Username is invalid")
+		return render_template('create_account.html')
  
 	email = request.form['email']
-	# email_regex = r'/^[a-zA-Z0-9._\-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/'
-	# if re.search(email_regex, email):
-	# 	pass
-	# else:
-	# 	# Username must only contain lowercase letters, numbers, -, ., or _, and must be between 3 and 16 chars
-	# 	flash("Email is invalid")
-	# 	return render_template('create_account.html')
+	email_pattern = re.compile(r'^[a-zA-Z0-9._\-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
+	if email_pattern.match(email):
+		print("Email format correct: " + email)
+	else:
+		# Email must be an email
+		flash("Email is invalid")
+		return render_template('create_account.html')
  
 	password = request.form['password']
-	# password_regex = r'/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$,/'
-	# password_regex = r'^[a-zA-Z0-9_\-\!\@\#\$\%\^\&\*]{8,}$'
-	# if re.search(password_regex, password):
-	# 	pass
-	# else:
-	# 	# Username must only contain lowercase letters, numbers, -, ., or _, and must be between 3 and 16 chars
-	# 	flash("Password is invalid")
-	# 	return render_template('create_account.html')
+	password_pattern = re.compile(r'^[a-zA-Z0-9_\-\!\@\#\$\%\^\&\*]{8,}$')
+	if password_pattern.match(password):
+		print("Password correct")
+	else:
+		# Password must be 8+ characters
+		flash("Password is invalid")
+		return render_template('create_account.html')
  
 	passwd_hash = generate_password_hash(password)
 	
