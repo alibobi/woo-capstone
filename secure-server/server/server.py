@@ -6,6 +6,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
+import os
+import ssl
+context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER) 
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+ASSETS_DIR = os.path.join(current_dir, '../cert/')
+cert_file_path = os.path.join(ASSETS_DIR, 'woo-cert.pem')
+key_file_path = os.path.join(ASSETS_DIR, 'woo-key.pem')
+context.load_cert_chain(cert_file_path, key_file_path)
 # Create a Flask application
 app = Flask(__name__)
 
@@ -19,11 +28,11 @@ def run():
  
 	# initialize limiter
 	# don't need limiter var rn because not doing anything special
-	limiter = Limiter(
-		get_remote_address,
-		app=app,
-		default_limits=["50 per minute", "1 per second"]
-	)
+#	limiter = Limiter(
+#		get_remote_address,
+#		app=app,
+#		default_limits=["50 per minute", "5 per second"]
+#	)
  
 	app.register_blueprint(frontend)
 
@@ -35,4 +44,4 @@ def run():
 		build_db()
 	
 
-	app.run(debug=True, port=9999)
+	app.run(debug=True, ssl_context=context, port=9999)
