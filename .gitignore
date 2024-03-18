@@ -1,3 +1,4 @@
 ./secure-server/server/__pycache__/
 ./secure-server/instance/
 ./secure-server/cert/woo-key.pem
+secure-server/cert/woo-key.pem
