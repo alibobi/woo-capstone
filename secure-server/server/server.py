@@ -5,6 +5,7 @@ from server.frontend_bp import frontend
 from flask_sqlalchemy import SQLAlchemy
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from flask_session import Session
 
 import os
 import ssl
@@ -23,9 +24,11 @@ def build_db() -> None:
     db.create_all()
 
 def run():
-	app.secret_key = 'super secret key'
-	app.config['SESSION_TYPE'] = 'filesystem'
- 
+        app.secret_key = 'super secret key'
+        app.config['SESSION_TYPE'] = 'filesystem'
+        app.config["SESSION_PERMANENT"] = False
+        Session(app)
+
 	# initialize limiter
 	# don't need limiter var rn because not doing anything special
 #	limiter = Limiter(
@@ -34,14 +37,14 @@ def run():
 #		default_limits=["50 per minute", "5 per second"]
 #	)
  
-	app.register_blueprint(frontend)
+        app.register_blueprint(frontend)
 
 	#app.config['SQLALCHEMY_DATABASE_URI']=DATABASE_URI
-	app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///test.db'
-	db.init_app(app)
+        app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///test.db'
+        db.init_app(app)
 
-	with app.app_context():
-		build_db()
+        with app.app_context():
+            build_db()
 	
 
-	app.run(debug=True, ssl_context=context, port=9999)
+        app.run(debug=True, ssl_context=context, port=9999)
