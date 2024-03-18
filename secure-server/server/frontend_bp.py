@@ -59,7 +59,7 @@ def login_attempt():
 @frontend.route("/login_success.html", methods=["GET"])
 def login_success():
     flash(session["user"])
-    return render_template('login_success.html')
+    return render_template('login_success.html', username=session["user"])
 
 @frontend.route("/create_account", methods=["GET"])
 @frontend.route("/create_account.html", methods=["GET"])
