@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from server.db import db
 from server.configurations import DATABASE_URI
 from server.frontend_bp import frontend
+from server.auth_bp import auth
 from flask_sqlalchemy import SQLAlchemy
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -38,6 +39,7 @@ def run():
 #	)
  
         app.register_blueprint(frontend)
+        app.register_blueprint(auth)
 
 	#app.config['SQLALCHEMY_DATABASE_URI']=DATABASE_URI
         app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///test.db'
