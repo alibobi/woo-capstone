@@ -39,9 +39,6 @@ def login_attempt():
 		# Password must be 8+ characters
 		flash("Password is invalid")
 		return render_template('login.html')
- 
- 
-	passwd_hash = generate_password_hash(password)
 
 	user = User.query.filter_by(username=username).first()
 
@@ -58,7 +55,7 @@ def login_attempt():
 @frontend.route("/login_success", methods=["GET"])
 @frontend.route("/login_success.html", methods=["GET"])
 def login_success():
-    flash(session["user"])
+    #flash(session["user"])
     return render_template('login_success.html', username=session["user"])
 
 @frontend.route("/create_account", methods=["GET"])
