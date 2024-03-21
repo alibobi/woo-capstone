@@ -34,4 +34,7 @@ def mfa():
 def verify_2fa():
     otp = request.form.get('otp')
     print(otp)
+    current_user = User.query.filter_by(username=session["user"]).first()
+    print(current_user.is_otp_valid(otp))
+
     return render_template('verify_2fa.html')
