@@ -28,8 +28,8 @@ def login_attempt():
 		print("Username entered")
 	else:
 		# Username must only contain lowercase letters, numbers, -, ., or _, and must be between 3 and 16 chars
-		flash("Username is invalid")
-		return render_template('login')
+		flash("Login is invalid")
+		return render_template('login.html')
  
 	password = request.form['password']
 	password_pattern = re.compile(r'^[a-zA-Z0-9_\-\!\@\#\$\%\^\&\*]{8,}$')
@@ -37,7 +37,7 @@ def login_attempt():
 		print("Password entered")
 	else:
 		# Password must be 8+ characters
-		flash("Password is invalid")
+		flash("Login is invalid")
 		return render_template('login.html')
 
 	user = User.query.filter_by(username=username).first()
