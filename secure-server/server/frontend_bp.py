@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, flash, session
 from server.db import db
 from server.crypto import generate_password_hash, verify_password
-from server.models import User, make_user
+from server.models import User 
+#, make_user
 import re
 
 frontend = Blueprint("frontend", __name__)
@@ -44,6 +45,8 @@ def login_attempt():
 
 	if user and verify_password(password, user.password):
             print("Logged in with user:", user) 
+            #session["user"] = user
+            print(user.id)
             session["user"] = username
             return redirect("/login_success")
            # return render_template('login_success.html')
@@ -97,7 +100,7 @@ def create_account():
  
 	passwd_hash = generate_password_hash(password)
 	
-	new_user = make_user(username, email, passwd_hash)
+	new_user = User(username, email, passwd_hash)
 	db.session.add(new_user)
 	db.session.commit()
 	
