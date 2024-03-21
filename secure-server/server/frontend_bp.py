@@ -43,10 +43,10 @@ def login_attempt():
 	user = User.query.filter_by(username=username).first()
 
 	if user and verify_password(password, user.password):
-			print("Logged in with user:", user) 
-			session["user"] = username
-			return redirect("/login_success")
-           	# return render_template('login_success.html')
+		print("Logged in with user:", user) 
+		session["user"] = username
+		return redirect("/login_success")
+        # return render_template('login_success.html')
 	else:
 		flash('Login failed')
 		return render_template('login.html')
