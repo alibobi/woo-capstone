@@ -1,12 +1,63 @@
 <!doctype html>
 <title>My Application</title>
+
+<style>
+  .error {
+    text-align: center;
+  }
+
+  ul {
+  display: inline-block;
+  text-align: left;
+}
+
+.alert {
+  padding: 1px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+</style>
+
+
 {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
+{% if messages %}
+<div class="error">
+  <!-- <ul class=flashes> -->
+  {% for message in messages %}
+    <!-- <li style="color:red;">{{ message }}</li> -->
+    <div class="alert">
+      <!-- <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> -->
+      <p> {{ message }} </p>
+    </div>
+  {% endfor %}
+  </ul>
+
+  
+</div>
+{% endif %}
 {% endwith %}
-{% block body %}{% endblock %}
+
+
+
+{% block body %}
+
+
+{% endblock %}

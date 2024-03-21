@@ -92,7 +92,7 @@ def create_account():
 		print("Password correct")
 	else:
 		# Password must be 8+ characters
-		flash("Password is invalid")
+		flash("Password is invalid, must be 8+ characters")
 		return render_template('create_account.html')
  
 	passwd_hash = generate_password_hash(password)
