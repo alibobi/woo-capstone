@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MFA Verification</title>
+</head>
+<body>
+    <h2>Multi-Factor Authentication Verification</h2>
+    <form action="/verify_2fa" method="post">
+        <label for="otp">Enter One-Time Password (OTP):</label><br>
+        <input type="text" id="otp" name="otp" required><br><br>
+        <input type="submit" value="Verify OTP">
+    </form>
+</body>
+</html>

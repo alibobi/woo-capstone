@@ -23,4 +23,15 @@ def change_password():
     return render_template('change_password.html', username=session["user"])
 
 
+@auth.route("/verify_2fa", methods=['GET'])
+@auth.route("/verify_2fa.html", methods=['GET'])
+def mfa():
+    return render_template('verify_2fa.html')
 
+
+@auth.route("/verify_2fa", methods=['POST'])
+@auth.route("/verify_2fa.html", methods=['POST'])
+def verify_2fa():
+    otp = request.form.get('otp')
+    print(otp)
+    return render_template('verify_2fa.html')
