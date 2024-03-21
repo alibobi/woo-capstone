@@ -33,9 +33,25 @@
         .toolbar button:hover {
             background-color: #0056b3;
         }
+
+        .instructions {
+            margin-top: 15px; 
+            text-align: center;
+        }
+
+        .instructions ul {
+            display: inline-block;
+            text-align: left;
+        }
+
         .configure_mfa {
             text-align: center;
-            margin-top: 15%; /* Increased margin top to create more space */
+            margin-top: 40px; /* Increased margin top to create more space */
+        }
+
+        .token {
+            text-align: center;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -47,15 +63,23 @@
             <button onclick="window.location.href = 'index.html';" class="logout-button">Log Out </button>
         </div>
 
-        <div class="configure_mfa">
-		<div class="text-center">
-			<img src="data:image/png;base64, {{ qr_image }}" alt="Secret Token" style="width:200px;height:200px"/>
-		</div>
+        <div class="instructions">
+            <h4>Instructions</h4>
+            <ul>
+                <li>Download <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en&gl=US" target="_blank">Google Authenticator</a> on your device.</li>
+                <li>Set up a new authenticator.</li>
+                <li>Scan the QR Code and then click <a href="/verify_2fa">here</a>.</li>
+            </ul>
         </div>
-	<div class="form-group">
-		<label for="secret">Secret Token</label>
-		<input type="text" class="form-control" id="secret" value="{{ secret }}" readonly>
-	</div>
+
+        <div class="configure_mfa">
+			<img src="data:image/png;base64, {{ qr_image }}" alt="Secret Token" style="width:200px;height:200px"/>
+        </div>
+
+        <div class="token">
+            <label for="secret">Secret Token</label>
+            <input type="text" class="form-control" id="secret" value="{{ secret }}" size="43" readonly>
+        </div>
     </div>
 
 </body>
