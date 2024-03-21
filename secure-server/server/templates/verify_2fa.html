@@ -9,7 +9,7 @@
     <h2>Multi-Factor Authentication Verification</h2>
     <form action="/verify_2fa" method="post">
         <label for="otp">Enter One-Time Password (OTP):</label><br>
-        <input type="text" id="otp" name="otp" required><br><br>
+	<input type="text" id="otp" name="otp" pattern="[0-9]{6}" title="Please enter exactly 6 digits" required><br><br>
         <input type="submit" value="Verify OTP">
     </form>
 </body>
