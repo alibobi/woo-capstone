@@ -29,8 +29,8 @@ def login_attempt():
 		print("Username entered")
 	else:
 		# Username must only contain lowercase letters, numbers, -, ., or _, and must be between 3 and 16 chars
-		flash("Username is invalid")
-		return render_template('login')
+		flash("Login is invalid")
+		return render_template('login.html')
  
 	password = request.form['password']
 	password_pattern = re.compile(r'^[a-zA-Z0-9_\-\!\@\#\$\%\^\&\*]{8,}$')
@@ -38,7 +38,7 @@ def login_attempt():
 		print("Password entered")
 	else:
 		# Password must be 8+ characters
-		flash("Password is invalid")
+		flash("Login is invalid")
 		return render_template('login.html')
 
 	user = User.query.filter_by(username=username).first()
@@ -51,8 +51,8 @@ def login_attempt():
             return redirect("/login_success")
            # return render_template('login_success.html')
 	else:
-	    flash('Login failed')
-	    return render_template('login.html')
+		flash('Login failed')
+		return render_template('login.html')
 
 
 @frontend.route("/login_success", methods=["GET"])
@@ -95,7 +95,7 @@ def create_account():
 		print("Password correct")
 	else:
 		# Password must be 8+ characters
-		flash("Password is invalid")
+		flash("Password is invalid, must be 8+ characters")
 		return render_template('create_account.html')
  
 	passwd_hash = generate_password_hash(password)
