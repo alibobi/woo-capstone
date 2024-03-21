@@ -4,3 +4,6 @@ POSTGRES_URI="localhost:9998"
 
 DATABASE_NAME="secureweb"
 DATABASE_URI = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_URI}/{DATABASE_NAME}"
+
+class Config(object):
+    APP_NAME = "Woo-Capstone"
