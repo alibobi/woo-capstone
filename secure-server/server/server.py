@@ -1,12 +1,13 @@
 from flask import Flask, render_template
 from server.db import db
-from server.configurations import DATABASE_URI
+from server.configurations import DATABASE_URI, SECRET_KEY
 from server.frontend_bp import frontend
 from server.auth_bp import auth
 from flask_sqlalchemy import SQLAlchemy
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_session import Session
+from flask_wtf import CSRFProtect
 
 import os
 import ssl
@@ -17,6 +18,7 @@ ASSETS_DIR = os.path.join(current_dir, '../cert/')
 cert_file_path = os.path.join(ASSETS_DIR, 'woo-cert.pem')
 key_file_path = os.path.join(ASSETS_DIR, 'woo-key.pem')
 context.load_cert_chain(cert_file_path, key_file_path)
+
 # Create a Flask application
 app = Flask(__name__)
 
@@ -29,6 +31,8 @@ def run():
         app.config['SESSION_TYPE'] = 'filesystem'
         app.config["SESSION_PERMANENT"] = False
         Session(app)
+        app.secret_key = SECRET_KEY
+        csrf = CSRFProtect(app)
 
 	# initialize limiter
 	# don't need limiter var rn because not doing anything special
@@ -45,8 +49,9 @@ def run():
         app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///test.db'
         db.init_app(app)
 
-        with app.app_context():
-            build_db()
+        #UNCOMMENT THIS IF WE WANT DATABASE TO RESTART ON EVERY RUN
+       # with app.app_context():
+       #     build_db()
 	
 
         app.run(debug=True, ssl_context=context, port=9999)

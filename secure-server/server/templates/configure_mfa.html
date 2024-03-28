@@ -79,6 +79,7 @@
         <div class="token">
             <label for="secret">Secret Token</label>
             <input type="text" class="form-control" id="secret" value="{{ secret }}" size="43" readonly>
+            <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />
         </div>
     </div>
 
