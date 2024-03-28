@@ -88,15 +88,18 @@ def create_account():
 		return render_template('create_account.html')
  
 	password = request.form['password']
-	password_pattern = re.compile(r'^[a-zA-Z0-9_\-\!\@\#\$\%\^\&\*]{8,}$')
-	if password == username:
-		flash("Password cannot be the same as username")
-	if password_pattern.match(password):
-		print("Password well formatted")
-	else:
-		# Password must be 8+ characters
-		flash("Password is invalid, must be 8+ characters")
+	#password_pattern = re.compile(r'^[a-zA-Z0-9_\-\!\@\#\$\%\^\&\*]{8,}$')
+	password_pattern = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\_\-\!\@\#\$\%\^\&\*])[a-zA-Z0-9_\-\!\@\#\$\%\^\&\*]{8,}$')
+	if username in password:
+		flash("Password cannot contain your username")
 		return render_template('create_account.html')
+	else:
+		if password_pattern.match(password):
+			print("Password well formatted")
+		else:
+			# Password must be 8+ characters
+			flash("Password must be 8+ characters and contain one lowercase letter, one uppercase letter, one digit, and one special character.")
+			return render_template('create_account.html')
  
 	passwd_hash = generate_password_hash(password)
 	
