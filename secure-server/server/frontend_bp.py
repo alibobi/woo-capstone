@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, request, redirect, flash, session
 from server.db import db
 from server.crypto import generate_password_hash, verify_password
 from server.models import User 
-#, make_user
 import re
 
 frontend = Blueprint("frontend", __name__)
@@ -89,6 +88,7 @@ def create_account():
  
 	password = request.form['password']
 	#password_pattern = re.compile(r'^[a-zA-Z0-9_\-\!\@\#\$\%\^\&\*]{8,}$')
+ 	# TODO: update to 12 later
 	password_pattern = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\_\-\!\@\#\$\%\^\&\*])[a-zA-Z0-9_\-\!\@\#\$\%\^\&\*]{8,}$')
 	if username in password:
 		flash("Password cannot contain your username")
