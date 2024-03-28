@@ -89,8 +89,10 @@ def create_account():
  
 	password = request.form['password']
 	password_pattern = re.compile(r'^[a-zA-Z0-9_\-\!\@\#\$\%\^\&\*]{8,}$')
+	if password == username:
+		flash("Password cannot be the same as username")
 	if password_pattern.match(password):
-		print("Password correct")
+		print("Password well formatted")
 	else:
 		# Password must be 8+ characters
 		flash("Password is invalid, must be 8+ characters")
