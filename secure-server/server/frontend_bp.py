@@ -119,6 +119,7 @@ def create_account_success():
 
 
 @frontend.route("/forgot_password")
+@frontend.route("/forgot_password.html")
 def forgot_password():
 	return render_template('forgot_password.html')
 

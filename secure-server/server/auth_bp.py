@@ -38,3 +38,9 @@ def verify_2fa():
     print(current_user.is_otp_valid(otp))
 
     return render_template('verify_2fa.html')
+
+@auth.route("/logout", methods=['GET'])
+def logout():
+    session.pop("user", None)
+    return redirect("/index.html")
+
