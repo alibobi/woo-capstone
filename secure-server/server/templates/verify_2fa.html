@@ -3,19 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MFA Verification</title>
+    <title>MFA Verification | Woo Capstone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .toolbar{
+            display: flex;
+            justify-content: right;
+            margin: 15px; 
+        }
+        .toolbar button {
+            padding: 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            justify-content: right;
+            margin-left: 10px; /* Creates spacing between Username and Logout button */
+        }
+        .toolbar button:hover {
+            background-color: #0056b3;
+        }
+        .instructions {
+            margin-top: 15px; 
+            text-align: center;
+        }
+        .instructions ul {
+            display: inline-block;
+            text-align: left;
+        }
+        .configure_mfa {
+            text-align: center;
+            margin-top: 40px; /* Increased margin top to create more space */
+        }
+        .token {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .centered-button {
+            text-align: center;
+            margin-top: 50px; /* Increased margin top to create more space */
+        }
+        .centered-button button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .centered-button button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h2>Multi-Factor Authentication Verification</h2>
-    <form action="/verify_2fa" method="post">
-        <label for="otp">Enter One-Time Password (OTP):</label><br>
-	<input type="text" id="otp" name="otp" pattern="[0-9]{6}" title="Please enter exactly 6 digits" required><br><br>
-        <input type="submit" value="Verify OTP">
-        <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />
-    </form>
+    <div class="container">
+        <h2>Multi-Factor Authentication Verification</h2>
 
-    <!-- <div class="centered-button">
-        <button onclick="window.location.href = 'index.html';">Back to Login</button>
-    </div> -->
+        <div>
+            {% extends "layout.html" %}
+        </div>
+        
+        {% block title %}Account Registration{% endblock %}
+        
+        {% block body %}
+
+        <form action="/verify_2fa" method="post">
+            <label for="otp">Enter One-Time Password (OTP):</label><br>
+        <input type="text" id="otp" name="otp" pattern="[0-9]{6}" title="Please enter exactly 6 digits" required><br><br>
+            <input type="submit" value="Verify OTP">
+            <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />
+        </form>
+
+        <!-- <div class="centered-button">
+            <button onclick="window.location.href = 'index.html';">Back to Login</button>
+        </div> -->
+    </div>
+    
 </body>
 </html>
+{% endblock %}
