@@ -55,11 +55,13 @@ def change_password():
         flash("Old password is incorrect")
         return render_template('change_password.html', username=session["user"])
     
+    # Verify the new password
     if user and not (new_pw == new_pw_conf):
         print("Logged in with user:", user) 
         flash("New passwords do not match")
         return render_template('change_password.html', username=session["user"])
 
+    # Case where all new password info is valid and user can reset their password
     if user and verify_password(old_pw, user.password) and (new_pw == new_pw_conf):
         # SET USER'S NEW PASSWORD AND CHANGE IT IN DATABASE
         new_passwd_hash = generate_password_hash(new_pw)
@@ -84,7 +86,15 @@ def verify_2fa():
     current_user = User.query.filter_by(username=session["user"]).first()
     print(current_user.is_otp_valid(otp))
 
-    return render_template('verify_2fa.html')
+    if current_user.is_otp_valid(otp):
+        current_user.is_two_factor_authentication_enabled = True
+        db.session.commit()
+        # Redirect user to login if MFA is successfully enabled 
+        return render_template('login.html')
+    else: 
+        flash("Invald OTP")
+        # Allow user to retry MFA enable
+        return render_template('verify_2fa.html')
 
 @auth.route("/logout", methods=['GET'])
 def logout():

@@ -22,6 +22,7 @@ def login_page():
 @frontend.route("/login", methods=["POST"])
 @frontend.route("/login.html", methods=["POST"])
 def login_attempt():
+	# USERNAME CHECK
 	username = request.form['username']
 	username_pattern = re.compile(r'^[a-z0-9_\-\.]{3,16}$')
 	if username_pattern.match(username):
@@ -31,6 +32,7 @@ def login_attempt():
 		flash("Login is invalid")
 		return render_template('login.html')
  
+	# PASSWORD CHECK
 	password = request.form['password']
 	password_pattern = re.compile(r'^[a-zA-Z0-9_\-\!\@\#\$\%\^\&\*]{8,}$')
 	if password_pattern.match(password):
@@ -39,13 +41,20 @@ def login_attempt():
 		# Password must be 8+ characters
 		flash("Login is invalid")
 		return render_template('login.html')
+	
 
+	# Get user information
 	user = User.query.filter_by(username=username).first()
 
+	# Valid user login 
 	if user and verify_password(password, user.password):
 		print("Logged in with user:", user) 
 		session["user"] = username
-		return redirect("/login_success")
+		# MFA ENABLED CHECK
+		if not user.is_two_factor_authentication_enabled:
+			return redirect("configure_mfa.html")
+		else:
+			return redirect("/login_success")
         # return render_template('login_success.html')
 	else:
 		flash('Login failed')

@@ -53,17 +53,33 @@
             text-align: center;
             margin-top: 15px;
         }
+        .centered-button {
+            text-align: center;
+            margin-top: 50px; /* Increased margin top to create more space */
+        }
+        .centered-button button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .centered-button button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="toolbar">
+        <!-- <div class="toolbar">
 		    <p>{{ username }}</p>
             <button onclick="window.location.href = 'login_success.html';" class="logout-button">Home</button>
             <button onclick="window.location.href = 'index.html';" class="logout-button">Log Out </button>
-        </div>
+        </div> -->
 
         <div class="instructions">
+            <h2>Enable MFA</h2>
             <h4>Instructions</h4>
             <ul>
                 <li>Download <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en&gl=US" target="_blank">Google Authenticator</a> on your device.</li>
@@ -80,6 +96,10 @@
             <label for="secret">Secret Token</label>
             <input type="text" class="form-control" id="secret" value="{{ secret }}" size="43" readonly>
             <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />
+        </div>
+
+        <div class="centered-button">
+            <button onclick="window.location.href = 'index.html';">Back to Login</button>
         </div>
     </div>
 
