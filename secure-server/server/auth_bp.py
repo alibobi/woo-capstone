@@ -90,7 +90,7 @@ def verify_2fa():
         current_user.is_two_factor_authentication_enabled = True
         db.session.commit()
         # Redirect user to login if MFA is successfully enabled 
-        return render_template('login_success.html', username=session["user"])
+        return redirect('login_success.html')
     else: 
         flash("Invalid OTP")
         # Allow user to retry MFA enable
