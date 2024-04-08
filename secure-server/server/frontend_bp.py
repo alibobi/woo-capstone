@@ -54,7 +54,7 @@ def login_attempt():
 		if not user.is_two_factor_authentication_enabled:
 			return redirect("configure_mfa.html")
 		else:
-			return redirect("/login_success")
+			return redirect("verify_2fa.html")
         # return render_template('login_success.html')
 	else:
 		flash('Login failed')
