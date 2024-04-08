@@ -50,8 +50,8 @@ def run():
         db.init_app(app)
 
         #UNCOMMENT THIS IF WE WANT DATABASE TO RESTART ON EVERY RUN
-       # with app.app_context():
-       #     build_db()
+        with app.app_context():
+           build_db()
 	
 
         app.run(debug=True, ssl_context=context, port=9999)
