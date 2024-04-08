@@ -105,6 +105,7 @@ def create_account():
 	else:
 		if password_pattern.match(password):
 			print("Password well formatted")
+		# TODO: make it so it tells you if you have an invalid character
 		else:
 			# Password must be 8+ characters
 			flash("Password must be 8+ characters and contain one lowercase letter, one uppercase letter, one digit, and one special character.")
@@ -122,6 +123,7 @@ def create_account():
 	else:
 		return redirect("/create_account_success")
 
+@frontend.route("/create_account_success")
 @frontend.route("/create_account_success")
 def create_account_success():
 	return render_template('account_success.html')
