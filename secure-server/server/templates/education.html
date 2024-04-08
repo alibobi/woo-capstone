@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Education | Woo Capstone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .toolbar{
+            display: flex;
+            justify-content: right;
+            margin: 15px; 
+        }
+        .toolbar button {
+            padding: 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            justify-content: right;
+            margin-left: 10px; /* Creates spacing between Username and Logout button */
+        }
+        .toolbar button:hover {
+            background-color: #0056b3;
+        }
+        .login_success {
+            text-align: center;
+            margin-top: 15%; /* Increased margin top to create more space */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="toolbar">
+            <button onclick="window.location.href = 'configure_mfa.html';" class="logout-button">MFA</button>
+            <button onclick="window.location.href = 'change_password.html';" class="logout-button">Change PW</button>
+            <button onclick="window.location.href = 'logout';" class="logout-button">Log Out </button>
+        </div>
+        <h1>our website is so secure.</h1>
+        <h3>no actually! we've worked to implement features that address all of the concerns of the 
+            OWASP top 10, as well as other web-related vulnerabilities</h3>
+    </div>
+    
+</body>
+</html>

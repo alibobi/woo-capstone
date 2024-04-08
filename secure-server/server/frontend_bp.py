@@ -132,3 +132,8 @@ def create_account_success():
 def forgot_password():
 	return render_template('forgot_password.html')
 
+@frontend.route("/education")
+@frontend.route("/education.html")
+def education():
+	return render_template('education.html')
+
