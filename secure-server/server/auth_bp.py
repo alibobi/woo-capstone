@@ -92,7 +92,7 @@ def verify_2fa():
         # Redirect user to login if MFA is successfully enabled 
         return render_template('login_success.html')
     else: 
-        flash("Invald OTP")
+        flash("Invalid OTP")
         # Allow user to retry MFA enable
         return render_template('verify_2fa.html')
 
