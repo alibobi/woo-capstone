@@ -48,15 +48,17 @@
         <ul>
             <li>A valid session is required to log into authenticated pages</li>
             <li>Modifying the URL to access authenticated pages does not work</li>
-            <li>Milk</li>
+            <li>CSRF tokens prevent the stealing of a user's session key</li>
           </ul> 
         <h3>2. Cryptographic Failures</h3>
         <ul>
-            <li>Coffee</li>
-            <li>Tea</li>
-            <li>Milk</li>
+            <li>TLS v1.3 is in place for all communications</li>
+            <li>Only salted password hashes are stored, and they're inaccessible from the site</li>
           </ul> 
         <h3>3. Injection</h3>
+        <ul>
+            <li>Input validation is performed on all input fields</li>
+          </ul> 
         <h3>4. Insecure Design</h3>
         <h3>5. Security Misconfiguration</h3>
         <h3>6. Vulnerable and Outdated Components</h3>
