@@ -79,6 +79,10 @@ def create_account():
     # we're very intentionally whitelisting certain chars as opposed to blacklisting, we're more likely to forget things
 	username = request.form['username']
 	username_pattern = re.compile(r'^[a-z0-9_\-\.]{3,16}$')
+	user_exists = db.session.query(User.id).filter_by(username=username).first() is not None
+	if user_exists:
+		flash("Username is not available")
+		return render_template('create_account.html')
 	if username_pattern.match(username):
 		print("Username format correct: " + username)
 	else:
