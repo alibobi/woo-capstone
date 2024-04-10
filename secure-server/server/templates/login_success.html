@@ -20,6 +20,9 @@
             justify-content: right;
             margin: 15px; 
         }
+        .toolbar p {
+            padding-right: 10px;
+        }
         .toolbar button {
             padding: 15px;
             background-color: #007bff;
@@ -28,14 +31,14 @@
             border-radius: 3px;
             cursor: pointer;
             justify-content: right;
-            margin-left: 10px; /* Creates spacing between Username and Logout button */
+            margin-left: 10px;
         }
         .toolbar button:hover {
             background-color: #0056b3;
         }
         .login_success {
             text-align: center;
-            margin-top: 15%; /* Increased margin top to create more space */
+            margin-top: 15%; 
         }
          /* Dropdown Button */
          .dropbtn {
@@ -46,7 +49,7 @@
             border-radius: 3px;
             cursor: pointer;
             justify-content: right;
-            margin-left: 10px; /* Creates spacing between Username and Logout button */
+            margin-left: 10px;
         }
 
         /* Dropdown button on hover & focus */
@@ -65,9 +68,10 @@
             display: none;
             position: absolute;
             background-color: #f1f1f1;
-            min-width: 160px;
+            min-width: 220px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1;
+            font-size: 15px;
         }
 
         /* Links inside the dropdown */
@@ -109,21 +113,36 @@
 <body>
     <div class="container">
         <div class="toolbar">
-		    <p>{{ username }}</p>
+		    <p>Welcome, {{ username }}!</p>
             <!-- <button onclick="window.location.href = 'configure_mfa.html';" class="logout-button">MFA</button> -->
-            <div class="dropdown">
+            <!-- <div class="dropdown">
                 <button onclick="myFunction()" class="dropbtn">Education</button>
                 <div id="myDropdown" class="dropdown-content">
-                  <a href="education.html">idfk</a>
+                    <a href="education.html">Education</a>
+                    <a href="broken_access_control.html">1. Broken Access Control</a>
+                    <a href="crypto_failures.html">2. Cryptographic Failures</a>
+                    <a href="injection_attack.html">3. Injection Attacks</a>
+                    <a href="injection_attack.html">4. Insecure Design</a>
+                    <a href="injection_attack.html">5. Security Misconfigurations</a>
+                    <a href="injection_attack.html">6. Vulnerable and Outdated Components</a>
                 </div>
-            </div>
+            </div> -->
+            <button onclick="window.location.href = 'education.html';" class="education-button">Education</button>
             <button onclick="window.location.href = 'change_password.html';" class="logout-button">Change PW</button>
             <button onclick="window.location.href = 'logout';" class="logout-button">Log Out </button>
         </div>
 
         <div class="login_success">
-            <p>
+            <!-- <p>
                 login success I suppose... (congrats)
+            </p> -->
+
+            <h2>
+                Welcome to our secure website!
+            </h2>
+
+            <p>
+                Please navigate through our education pages in the toolbar above to learn about common web attacks and security features implemented on this website to prevent them.
             </p>
         </div>
     </div>

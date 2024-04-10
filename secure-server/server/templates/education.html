@@ -15,58 +15,160 @@
             flex-direction: column;
             justify-content: center;
         }
+        .education {
+            text-align: center;
+            margin: 15px;
+        }
+        .education h1 {
+            margin-top: 10px;
+        }
         .toolbar{
             display: flex;
             justify-content: right;
             margin: 15px; 
         }
+        .toolbar p {
+            padding-right: 10px;
+        }
         .toolbar button {
-            padding: 15px;
+            padding: 18px;
             background-color: #007bff;
             color: #fff;
             border: none;
             border-radius: 3px;
             cursor: pointer;
             justify-content: right;
-            margin-left: 10px; /* Creates spacing between Username and Logout button */
+            margin-left: 10px; 
         }
         .toolbar button:hover {
             background-color: #0056b3;
         }
+        .attacks {
+            margin-top: 60px;
+            text-align: left;
+        }
+
+        .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            margin: 3px;
+        }
+        .active, .collapsible:hover {
+            background-color: #555;
+        }
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="toolbar">
-            <button onclick="window.location.href = 'login_success.html';" class="button">Go Back</button>
-        </div>
-        <h1>our website is so secure.</h1>
-        <h3>no actually! we've worked to implement features that address all of the concerns of the 
-            OWASP top 10, as well as other web-related vulnerabilities</h3>
-        
-        <h3>1. Broken Access Control</h3>
-        <ul>
-            <li>A valid session is required to log into authenticated pages</li>
-            <li>Modifying the URL to access authenticated pages does not work</li>
-            <li>CSRF tokens prevent the stealing of a user's session key</li>
-          </ul> 
-        <h3>2. Cryptographic Failures</h3>
-        <ul>
-            <li>TLS v1.3 is in place for all communications</li>
-            <li>Only salted password hashes are stored, and they're inaccessible from the site</li>
-          </ul> 
-        <h3>3. Injection</h3>
-        <ul>
-            <li>Input validation is performed on all input fields</li>
-          </ul> 
-        <h3>4. Insecure Design</h3>
-        <h3>5. Security Misconfiguration</h3>
-        <h3>6. Vulnerable and Outdated Components</h3>
-        <h3>7. Identification and Authentication Failures</h3>
-        <h3>8. Software and Data Integrity Failures</h3>
-        <h3>9. Security Logging and Monitoring Failures</h3>
-        <h3>10. Server-Side Request Forgery</h3>
+    <div class="toolbar">
+        <button onclick="window.location.href = 'login_success.html';" class="button">Home</button>
     </div>
+
+    <div class="container">
+        <div class="education">
+            <h1>How We Secured Our Website</h1>
+
+            <h4>
+                We've worked to implement features that address all of the vulnerabilities on the 
+                OWASP top 10, as well as other common web-related attacks. 
+            </h4>
+
+            <div class="attacks">
+                <h3>Common Web Vulnerabilities:</h3>
+
+                <button type="button" class="collapsible">1. Broken Access Control</button>
+                <div class="content">
+                    <p>[TODO: Vulnerability Description]</p>
+                    <p>[TODO: How we protect against this]</p>
+                </div>
+
+                <button type="button" class="collapsible">2. Cryptographic Failures</button>
+                <div class="content">
+                    <p>[TODO: Vulnerability Description]</p>
+                    <p>[TODO: How we protect against this]</p>
+                </div>
+
+                <button type="button" class="collapsible">3. Injection Attacks</button>
+                <div class="content">
+                    <p>[TODO: Vulnerability Description]</p>
+                    <p>[TODO: How we protect against this]</p>
+                </div>
+
+                <button type="button" class="collapsible">4. Insecure Design</button>
+                <div class="content">
+                    <p>[TODO: Vulnerability Description]</p>
+                    <p>[TODO: How we protect against this]</p>
+                </div>
+
+                <button type="button" class="collapsible">5. Security Misconfiguration</button>
+                <div class="content">
+                    <p>[TODO: Vulnerability Description]</p>
+                    <p>[TODO: How we protect against this]</p>
+                </div>
+
+                <button type="button" class="collapsible">6. Vulnerable and Outdated Components</button>
+                <div class="content">
+                    <p>[TODO: Vulnerability Description]</p>
+                    <p>[TODO: How we protect against this]</p>
+                </div>
+
+                <button type="button" class="collapsible">7. Identification and Authentication Failures</button>
+                <div class="content">
+                    <p>[TODO: Vulnerability Description]</p>
+                    <p>[TODO: How we protect against this]</p>
+                </div>
+
+                <button type="button" class="collapsible">8. Software and Data Integrity Failures</button>
+                <div class="content">
+                    <p>[TODO: Vulnerability Description]</p>
+                    <p>[TODO: How we protect against this]</p>
+                </div>
+
+                <button type="button" class="collapsible">9. Security Logging and Monitoring Failures</button>
+                <div class="content">
+                    <p>[TODO: Vulnerability Description]</p>
+                    <p>[TODO: How we protect against this]</p>
+                </div>
+
+                <button type="button" class="collapsible">10. Server Side Request Forgery (SSRF)</button>
+                <div class="content">
+                    <p>[TODO: Vulnerability Description]</p>
+                    <p>[TODO: How we protect against this]</p>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+        </script>
     
 </body>
 </html>

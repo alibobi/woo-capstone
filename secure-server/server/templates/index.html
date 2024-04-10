@@ -20,7 +20,7 @@
         }
         .home {
             text-align: center;
-            margin-top: 10px; /* Increased margin top to create more space */
+            margin-top: 10px;
         }
         .home button {
             padding: 10px;
@@ -29,9 +29,13 @@
             border: none;
             border-radius: 3px;
             cursor: pointer;
+            margin: 5px;
         }
         .home button:hover {
             background-color: #0056b3;
+        }
+        h1 {
+            margin-bottom: 35px; 
         }
     </style>
 </head>
@@ -41,9 +45,14 @@
             <h1>
                 welcome to our capstone project :)
             </h1>
+            
+            <div>
+                <button onclick="window.location.href = 'login.html';" id="myButton" class="float-left submit-button">Login</button>
+            </div>
 
-            <button onclick="window.location.href = 'login.html';" id="myButton" class="float-left submit-button">Login</button>
-            <button onclick="window.location.href = 'create_account.html';" id="myButton2" class="float-left submit-button">Create Account</button> 
+            <div>
+                <button onclick="window.location.href = 'create_account.html';" id="myButton2" class="float-left submit-button">Create Account</button> 
+            </div>
         </div>
     </div>
 
