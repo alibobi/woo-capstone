@@ -20,6 +20,9 @@
             justify-content: right;
             margin: 15px; 
         }
+        .toolbar p {
+            padding-right: 10px;
+        }
         .toolbar button {
             padding: 15px;
             background-color: #007bff;
@@ -109,7 +112,7 @@
 <body>
     <div class="container">
         <div class="toolbar">
-		    <p>{{ username }}</p>
+		    <p>Welcome, {{ username }}!</p>
             <!-- <button onclick="window.location.href = 'configure_mfa.html';" class="logout-button">MFA</button> -->
             <div class="dropdown">
                 <button onclick="myFunction()" class="dropbtn">Education</button>

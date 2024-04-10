@@ -18,37 +18,35 @@
         .container {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            align-items: center;
         }
-        .toolbar{
-            display: flex;
-            justify-content: right;
-            margin: 15px; 
+        h2 {
+            text-align: center;
+            margin-top: 70px;
         }
-        .toolbar button {
-            padding: 15px;
+        .configure_mfa {
+            text-align: center;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            margin-bottom: 20px; /* Added margin bottom to create space between the containers */
+        }
+        .configure_mfa input#submit{
+            padding: 10px;
             background-color: #007bff;
             color: #fff;
             border: none;
             border-radius: 3px;
             cursor: pointer;
-            justify-content: right;
-            margin-left: 10px; /* Creates spacing between Username and Logout button */
         }
-        .toolbar button:hover {
+        .configure_mfa input#submit:hover {
             background-color: #0056b3;
         }
-        .instructions {
-            margin-top: 15px; 
-            text-align: center;
-        }
-        .instructions ul {
-            display: inline-block;
-            text-align: left;
-        }
-        .configure_mfa {
-            text-align: center;
-            margin-top: 40px; /* Increased margin top to create more space */
+        .configure_mfa input#otp{
+            margin-top: 10px;
         }
         .token {
             text-align: center;
@@ -83,16 +81,28 @@
         
         {% block body %}
 
-        <form action="/verify_2fa" method="post">
-            <label for="otp">Enter One-Time Password (OTP):</label><br>
-        <input type="text" id="otp" name="otp" pattern="[0-9]{6}" title="Please enter exactly 6 digits" required><br><br>
-            <input type="submit" value="Verify OTP">
-            <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />
-        </form>
+        <div class="configure_mfa">
+            <form action="/verify_2fa" method="post">
+                <label for="otp">Enter One-Time Password (OTP):</label><br>
+            <input type="text" id="otp" name="otp" pattern="[0-9]{6}" title="Please enter exactly 6 digits" required><br><br>
+                <input type="submit" id="submit" value="Verify OTP">
+                <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />
+            </form>
+        </div>
 
         <!-- <div class="centered-button">
-            <button onclick="window.location.href = 'index.html';">Back to Login</button>
+            <div>
+                <button onclick="window.location.href = 'configure_mfa.html';">Reset MFA</button>
+            </div>
+            <div style="margin-top: 10px">
+                <button onclick="window.location.href = 'login.html';">Back to Login</button>
+            </div>
         </div> -->
+
+        <div class="centered-button">
+                <button style="margin:10px" onclick="window.location.href = 'configure_mfa.html';">Reset MFA</button>
+                <button onclick="window.location.href = 'login.html';">Back to Login</button>
+        </div>
     </div>
     
 </body>
