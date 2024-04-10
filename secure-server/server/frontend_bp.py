@@ -143,3 +143,13 @@ def forgot_password():
 def education():
 	return render_template('education.html')
 
+@frontend.route("/broken_access_control")
+@frontend.route("/broken_access_control.html")
+def broken_access_control():
+	return render_template('broken_access_control.html')
+
+@frontend.route("/crypto_failures")
+@frontend.route("/crypto_failures.html")
+def crypto_failures():
+	return render_template('crypto_failures.html')
+
