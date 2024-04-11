@@ -50,7 +50,7 @@ def run():
         app.register_blueprint(auth)
 
         login_manager = LoginManager()
-        login_manager.login_view = 'auth.login'
+        login_manager.login_view = 'frontend.login_page'
         login_manager.init_app(app)
 	
         @login_manager.user_loader
@@ -67,3 +67,10 @@ def run():
 	
 
         app.run(debug=False, ssl_context=context, port=9999)
+
+@app.before_request
+def check_session_expiration():
+    if 'user_id' not in session:
+        # If there's no user_id in session, we assume the session is expired or never set
+        return redirect(url_for('/'))
+
