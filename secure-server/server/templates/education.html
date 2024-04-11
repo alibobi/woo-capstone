@@ -82,7 +82,7 @@
 
             <h4>
                 We've worked to implement features that address all of the vulnerabilities on the 
-                OWASP top 10, as well as other common web-related attacks. 
+                OWASP Top 10, as well as other common web-related attacks. 
             </h4>
 
             <div class="attacks">
@@ -132,8 +132,8 @@
 
                 <button type="button" class="collapsible">8. Software and Data Integrity Failures</button>
                 <div class="content">
-                    <p>[TODO: Vulnerability Description]</p>
-                    <p>[TODO: How we protect against this]</p>
+                    <p>Software and data integrity failures come about when the security of third party libraries and the develpment pipeline aren't mandated.</p>
+                    <p>Our project is relatively small, therefore integrity of our repository and contributors is easy to maintain. We also ensure that all of our dependencies are up-to-date before we publish the server.</p>
                 </div>
 
                 <button type="button" class="collapsible">9. Security Logging and Monitoring Failures</button>
@@ -144,8 +144,8 @@
 
                 <button type="button" class="collapsible">10. Server Side Request Forgery (SSRF)</button>
                 <div class="content">
-                    <p>[TODO: Vulnerability Description]</p>
-                    <p>[TODO: How we protect against this]</p>
+                    <p>Web applications are vulnerable to SSRF when attackers can cause the server to access pages the end user shouldn't have access to, typically because they require a certain level of access. For example, causing the server to access the user database directly for download.</p>
+                    <p>We mitigate this by ensuring that there aren't any possible routes to sensitive files, and by validating any client inputs.</p>
                 </div>
             </div>
         </div>
