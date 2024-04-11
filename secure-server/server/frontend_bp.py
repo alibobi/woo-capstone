@@ -84,6 +84,7 @@ def create_account_page():
 
 @frontend.route("/create_account", methods=["POST"])
 @frontend.route("/create_account.html", methods=["POST"])
+@limiter.limit("5/hour")
 def create_account():
     # we're very intentionally whitelisting certain chars as opposed to blacklisting, we're more likely to forget things
 	username = request.form['username']

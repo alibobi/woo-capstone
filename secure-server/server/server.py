@@ -76,3 +76,6 @@ def check_session_expiration():
             # If there's no user_id in session, we assume the session is expired or never set
             return redirect('/')
 
+@app.errorhandler(429)
+def ratelimit_handler(e):
+    return "You have exceeded your request rate. Try again later.", 429
