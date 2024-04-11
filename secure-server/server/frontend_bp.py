@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, flash, session
 from server.db import db
 from server.crypto import generate_password_hash, verify_password
 from server.models import User 
+from server.utils import is_password_in_list
 import re
 
 frontend = Blueprint("frontend", __name__)
@@ -110,6 +111,9 @@ def create_account():
 	if username in password:
 		flash("Password cannot contain your username")
 		return render_template('create_account.html')
+	elif is_password_in_list(password):
+		flash("Password cannot be commonly leaked")
+		return render_template('create_account.html')
 	else:
 		if password_pattern.match(password):
 			print("Password well formatted")
@@ -141,4 +145,5 @@ def create_account_success():
 @frontend.route("/forgot_password.html")
 def forgot_password():
 	return render_template('forgot_password.html')
+
 

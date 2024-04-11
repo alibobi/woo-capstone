@@ -12,3 +12,13 @@ def get_b64encoded_qr_image(data):
     buffered = BytesIO()
     img.save(buffered)
     return b64encode(buffered.getvalue()).decode("utf-8")
+
+
+def is_password_in_list(password):
+    with open("./server/10-million-password-list-top-10000.txt", 'r') as file:
+        dictionary = set(line.strip() for line in file)
+
+    if password in dictionary:
+        return True
+    else:
+        return False
