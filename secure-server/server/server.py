@@ -1,16 +1,15 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, session, request
 from server.db import db
 from server.configurations import DATABASE_URI, SECRET_KEY
 from server.frontend_bp import frontend
 from server.auth_bp import auth
 from flask_sqlalchemy import SQLAlchemy
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
 from flask_session import Session
 from flask_wtf import CSRFProtect
 from flask_login import LoginManager
 from datetime import timedelta
 from server.models import User
+from server.limiter_setup import limiter
 
 import os
 import ssl
@@ -30,22 +29,19 @@ def build_db() -> None:
     db.create_all()
 
 def run():
-        app.secret_key = 'super secret key'
+        app.secret_key = os.getenv('FLASK_SECRET_KEY')
         app.config['SESSION_TYPE'] = 'filesystem'
+        app.config['SESSION_COOKIE_SECURE'] = True
+        app.config['SESSION_COOKIE_HTTPONLY'] = True
 #        app.config["SESSION_PERMANENT"] = False
         app.config['PERMANENT_SESSION_LIFETIME'] =  timedelta(minutes=5)
         Session(app)
         app.secret_key = SECRET_KEY
         csrf = CSRFProtect(app)
 
-	# initialize limiter
-	# don't need limiter var rn because not doing anything special
-#	limiter = Limiter(
-#                get_remote_address,
-#		app=app,
-#		default_limits=["50 per minute", "5 per second"]
-#	)
  
+        limiter.init_app(app)
+
         app.register_blueprint(frontend)
         app.register_blueprint(auth)
 
@@ -70,7 +66,13 @@ def run():
 
 @app.before_request
 def check_session_expiration():
-    if 'user_id' not in session:
-        # If there's no user_id in session, we assume the session is expired or never set
-        return redirect(url_for('/'))
+        # Define a list of exempt routes (e.g., 'login', 'static', etc.)
+    exempt_routes = ['frontend.login_page', 'frontend.home', 'frontend.create_account_page', 'frontend.login_attempt', 'frontend.create_account', 'frontend.create_account_success']
+
+    print(request.endpoint)
+    # Check if the request endpoint is in the exempt routes
+    if request.endpoint and request.endpoint not in exempt_routes:
+        if 'user' not in session:
+            # If there's no user_id in session, we assume the session is expired or never set
+            return redirect('/')
 

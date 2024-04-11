@@ -4,6 +4,8 @@ from server.crypto import generate_password_hash, verify_password
 from server.models import User 
 from server.utils import is_password_in_list
 import re
+from flask_login import login_required
+from server.limiter_setup import limiter
 
 frontend = Blueprint("frontend", __name__)
 
@@ -24,6 +26,7 @@ def login_page():
 
 @frontend.route("/login", methods=["POST"])
 @frontend.route("/login.html", methods=["POST"])
+@limiter.limit("5/minute")
 def login_attempt():
 	# USERNAME CHECK
 	username = request.form['username']
@@ -67,6 +70,7 @@ def login_attempt():
 
 @frontend.route("/login_success", methods=["GET"])
 @frontend.route("/login_success.html", methods=["GET"])
+#@login_required
 def login_success():
     #flash(session["user"])
     return render_template('login_success.html', username=session["user"])
