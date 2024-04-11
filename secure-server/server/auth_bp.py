@@ -111,4 +111,4 @@ def logout():
 @auth.route("/education.html")
 @login_required
 def education():
-        return render_template('education.html')
+        return render_template('education.html', username=session["user"])
