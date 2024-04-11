@@ -106,6 +106,9 @@ def create_account():
 	if username in password:
 		flash("Password cannot contain your username")
 		return render_template('create_account.html')
+	elif is_password_in_list(password):
+		flash("Password cannot be commonly leaked")
+		return render_template('create_account.html')
 	else:
 		if password_pattern.match(password):
 			print("Password well formatted")
@@ -153,3 +156,11 @@ def broken_access_control():
 def crypto_failures():
 	return render_template('crypto_failures.html')
 
+def is_password_in_list(password):
+    with open("./server/10-million-password-list-top-10000.txt", 'r') as file:
+        dictionary = set(line.strip() for line in file)
+    
+    if password in dictionary:
+        return True
+    else:
+        return False
