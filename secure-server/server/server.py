@@ -8,6 +8,9 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_session import Session
 from flask_wtf import CSRFProtect
+from flask_login import LoginManager
+from datetime import timedelta
+from server.models import User
 
 import os
 import ssl
@@ -29,7 +32,8 @@ def build_db() -> None:
 def run():
         app.secret_key = 'super secret key'
         app.config['SESSION_TYPE'] = 'filesystem'
-        app.config["SESSION_PERMANENT"] = False
+#        app.config["SESSION_PERMANENT"] = False
+        app.config['PERMANENT_SESSION_LIFETIME'] =  timedelta(minutes=5)
         Session(app)
         app.secret_key = SECRET_KEY
         csrf = CSRFProtect(app)
@@ -37,7 +41,7 @@ def run():
 	# initialize limiter
 	# don't need limiter var rn because not doing anything special
 #	limiter = Limiter(
-#		get_remote_address,
+#                get_remote_address,
 #		app=app,
 #		default_limits=["50 per minute", "5 per second"]
 #	)
@@ -45,7 +49,15 @@ def run():
         app.register_blueprint(frontend)
         app.register_blueprint(auth)
 
-	#app.config['SQLALCHEMY_DATABASE_URI']=DATABASE_URI
+        login_manager = LoginManager()
+        login_manager.login_view = 'auth.login'
+        login_manager.init_app(app)
+	
+        @login_manager.user_loader
+        def load_user(user_id):
+            return User.query.get(int(user_id))
+
+        #app.config['SQLALCHEMY_DATABASE_URI']=DATABASE_URI
         app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///test.db'
         db.init_app(app)
 
@@ -54,4 +66,4 @@ def run():
            build_db()
 	
 
-        app.run(debug=True, ssl_context=context, port=9999)
+        app.run(debug=False, ssl_context=context, port=9999)

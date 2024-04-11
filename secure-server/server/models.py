@@ -1,4 +1,5 @@
 from server.db import db
+from flask_login import UserMixin
 from dataclasses import dataclass
 from sqlalchemy.orm import class_mapper
 from server.configurations import Config
@@ -6,7 +7,7 @@ from server.configurations import Config
 import pyotp
 
 @dataclass
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = "user"
 
     id = db.Column(db.Integer, primary_key=True)
