@@ -87,65 +87,53 @@
             <h1>How We Secured Our Website</h1>
 
             <h4>
-                We've worked to implement features that address all of the vulnerabilities on the 
+                We've worked to implement features that address all of the relevant vulnerabilities on the 
                 OWASP Top 10, as well as other common web-related attacks. 
             </h4>
 
             <div class="attacks">
                 <h3>Common Web Vulnerabilities:</h3>
 
-                <button type="button" class="collapsible">1. Broken Access Controls</button>
+                <button type="button" class="collapsible">Broken Access Controls</button>
                 <div class="content">
                     <p>Broken access controls come from a failure to correctly implement authorization, leading to attackers being able to access pages they should not have the privilege to do. This could be by modifying URLs to direct to authenticated pages, forcing a browser to visit them, or by other means.</p>
                     <p>We prevent this by ensuring that any pages intended for logged-in users require a valid session to visit, and only implementing access control policies in a single file (to avoid misconfiguration).</p>
                 </div>
 
-                <button type="button" class="collapsible">2. Cryptographic Failures</button>
+                <button type="button" class="collapsible">Cryptographic Failures</button>
                 <div class="content">
                     <p>Leaked data is often the result of cryptographic failures. This category is rather broad, and can come from data being unprotected in tranist, cryptographic secrets being leaked in source files, deprecated algorithms being used, to name a few reasons.</p>
                     <p>Our website requires HTTPS to view, and has a valid certificate to facilitate this. User passwords are hashed and salted with bcrypt, which aligns with modern password storage standards. Secrets are inaccessible to external viewing.</p>
                 </div>
 
-                <button type="button" class="collapsible">3. Injection Attacks</button>
+                <button type="button" class="collapsible">Injection Attacks</button>
                 <div class="content">
                     <p>Injection attacks take place when user input fields aren't validated or sanitized correctly.</p>
                     <p>We prevent inejctions because none of our URLs are parameterized, and all of our input fields whitelist only particular characters, leaving out opportunities for injection with things like script tags and SQL injections.</p>
                 </div>
 
-                <button type="button" class="collapsible">4. Insecure Design</button>
+                <button type="button" class="collapsible">Security Misconfigurations</button>
                 <div class="content">
-                    <p>[TODO: Vulnerability Description]</p>
-                    <p>[TODO: How we protect against this]</p>
+                    <p>Many languages and libraries have the ability to configure security settings--however, the defaults often aren't the most secure option.</p>
+                    <p>All of the standard security headers are enabled for the browser. There are no extraneous files anywhere, nor are there overly informative error messages.</p>
                 </div>
 
-                <button type="button" class="collapsible">5. Security Misconfigurations</button>
+                <button type="button" class="collapsible">Identification and Authentication Failures</button>
                 <div class="content">
-                    <p>[TODO: Vulnerability Description]</p>
-                    <p>[TODO: How we protect against this]</p>
-                </div>
-
-                <button type="button" class="collapsible">6. Vulnerable and Outdated Components</button>
-                <div class="content">
-                    <p>This vulnerability is far more common in legacy systems, but there are many web applications which fail to update their dependencies</p>
-                    <p>[TODO: How we protect against this]</p>
-                </div>
-
-                <button type="button" class="collapsible">7. Identification and Authentication Failures</button>
-                <div class="content">
-                    <p>[TODO: Vulnerability Description]</p>
+                    <p>Broken authentication comes from attackers being able to impersonate users.</p>
                     <p>We protect against these vulnerabilities in a number of ways. A user's session will not only get deleted upon logout, but on browser closure, and after 5 minutes of inactivity. Our pas</p>
                 </div>
 
-                <button type="button" class="collapsible">8. Software and Data Integrity Failures</button>
+                <button type="button" class="collapsible">Software and Data Integrity Failures</button>
                 <div class="content">
                     <p>Software and data integrity failures come about when the security of third party libraries and the develpment pipeline aren't mandated.</p>
                     <p>Our project is relatively small, therefore integrity of our repository and contributors is easy to maintain. We also ensure that all of our dependencies are up-to-date before we publish the server.</p>
                 </div>
 
-                <button type="button" class="collapsible">9. Security Logging and Monitoring Failures</button>
+                <button type="button" class="collapsible">Security Logging and Monitoring Failures</button>
                 <div class="content">
-                    <p>[TODO: Vulnerability Description]</p>
-                    <p>[TODO: How we protect against this]</p>
+                    <p>Logs and monitoring are necessary for detecting current attacks and trying to prevent future ones, and many sites don't have these necessary logging capabilities.</p>
+                    <p>While we don't have logs stored anywhere presently, an output feed can be seen on our server. Additionally, we monitor for standard attacks (account timeout, rate limiting, DDoS prevention).</p>
                 </div>
 
                 <button type="button" class="collapsible">10. Server Side Request Forgery (SSRF)</button>
