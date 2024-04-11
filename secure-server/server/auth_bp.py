@@ -4,6 +4,7 @@ from server.crypto import generate_password_hash, verify_password
 from server.models import User #, make_user
 import re
 from server.utils import get_b64encoded_qr_image
+from flask_login import login_user, logout_user, login_required
 
 auth = Blueprint("auth", __name__)
 
@@ -19,6 +20,7 @@ def configure_mfa():
 
 @auth.route("/change_password", methods=["GET"])
 @auth.route("/change_password.html", methods=["GET"])
+@login_required
 def change_password_page():
     return render_template('change_password.html', username=session["user"])
 
@@ -89,6 +91,7 @@ def verify_2fa():
     if current_user.is_otp_valid(otp):
         current_user.is_two_factor_authentication_enabled = True
         db.session.commit()
+        login_user(current_user)
         # Redirect user to login if MFA is successfully enabled 
         return redirect('login_success.html')
     else: 
@@ -97,7 +100,15 @@ def verify_2fa():
         return render_template('verify_2fa.html')
 
 @auth.route("/logout", methods=['GET'])
+@login_required
 def logout():
     session.pop("user", None)
+    logout_user()
     return redirect("/index.html")
 
+
+@auth.route("/education")
+@auth.route("/education.html")
+@login_required
+def education():
+        return render_template('education.html')

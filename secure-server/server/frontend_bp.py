@@ -10,6 +10,7 @@ frontend = Blueprint("frontend", __name__)
 @frontend.route("/index")
 @frontend.route("/index.html")
 def home():
+        session.pop('_flashes', None)
         if 'user' in session:
             print(session["user"])
         return render_template('index.html')
@@ -17,7 +18,8 @@ def home():
 @frontend.route("/login", methods=["GET"])
 @frontend.route("/login.html", methods=["GET"])
 def login_page():
-	return render_template('login.html')
+    session.pop('_flashes', None)
+    return render_template('login.html')
 
 @frontend.route("/login", methods=["POST"])
 @frontend.route("/login.html", methods=["POST"])
@@ -50,6 +52,7 @@ def login_attempt():
 	if user and verify_password(password, user.password):
 		print("Logged in with user:", user) 
 		session["user"] = username
+#                session.permanent = True
 		# MFA ENABLED CHECK
 		if not user.is_two_factor_authentication_enabled:
 			return redirect("configure_mfa.html")
@@ -70,6 +73,7 @@ def login_success():
 @frontend.route("/create_account", methods=["GET"])
 @frontend.route("/create_account.html", methods=["GET"])
 def create_account_page():
+    session.pop('_flashes', None)
     return render_template('create_account.html')
 
 
@@ -137,19 +141,4 @@ def create_account_success():
 @frontend.route("/forgot_password.html")
 def forgot_password():
 	return render_template('forgot_password.html')
-
-@frontend.route("/education")
-@frontend.route("/education.html")
-def education():
-	return render_template('education.html')
-
-@frontend.route("/broken_access_control")
-@frontend.route("/broken_access_control.html")
-def broken_access_control():
-	return render_template('broken_access_control.html')
-
-@frontend.route("/crypto_failures")
-@frontend.route("/crypto_failures.html")
-def crypto_failures():
-	return render_template('crypto_failures.html')
 
