@@ -96,19 +96,19 @@
 
                 <button type="button" class="collapsible">1. Broken Access Controls</button>
                 <div class="content">
-                    <p>[TODO: Vulnerability Description]</p>
-                    <p>[TODO: How we protect against this]</p>
+                    <p>Broken access controls come from a failure to correctly implement authorization, leading to attackers being able to access pages they should not have the privilege to do. This could be by modifying URLs to direct to authenticated pages, forcing a browser to visit them, or by other means.</p>
+                    <p>We prevent this by ensuring that any pages intended for logged-in users require a valid session to visit, and only implementing access control policies in a single file (to avoid misconfiguration).</p>
                 </div>
 
                 <button type="button" class="collapsible">2. Cryptographic Failures</button>
                 <div class="content">
-                    <p>[TODO: Vulnerability Description]</p>
-                    <p>[TODO: How we protect against this]</p>
+                    <p>Leaked data is often the result of cryptographic failures. This category is rather broad, and can come from data being unprotected in tranist, cryptographic secrets being leaked in source files, deprecated algorithms being used, to name a few reasons.</p>
+                    <p>Our website requires HTTPS to view, and has a valid certificate to facilitate this. User passwords are hashed and salted with bcrypt, which aligns with modern password storage standards. Secrets are inaccessible to external viewing.</p>
                 </div>
 
                 <button type="button" class="collapsible">3. Injection Attacks</button>
                 <div class="content">
-                    <p>[TODO: Vulnerability Description]</p>
+                    <p>Injection attacks take place when </p>
                     <p>[TODO: How we protect against this]</p>
                 </div>
 
